@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wispies: The Storm Guardians</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="javascript.js" defer></script>
+</head>
+
+
+<body>
+
+    <div id="startScreen">
+        <div id="startContent">
+          <h1>Welkom bij Wispie World</h1>
+          <h2>Wispies The Guardians Of The Storm</h2>
+          <button id="startButton">Start</button>
+        </div>
+      </div>
+
+      
+    <div id="game">
+        <div id="wispieContainer">
+            <img src="images/wispie1happy.png" class="wispie" alt="Wispie 1">
+            <img src="images/wispie2happy.png" class="wispie" alt="Wispie 2">
+            <img src="images/wispie3happy.png" class="wispie" alt="Wispie 3">
+            <img src="images/wispie4happy.png" class="wispie" alt="Wispie 4">
+            <img src="images/wispie5happy.png" class="wispie" alt="Wispie 5">
+          </div>
+         
+    </div>
+    <div id="overlay" class="hidden"></div>
+  
+
+    <div id="popup" class="hidden">
+        <h2>Wispie Care</h2>
+        <div class="content">
+          <div id="stats">
+            <p>Hunger: <span id="hungerStat">0</span></p>
+            <p>Fun: <span id="funStat">0</span></p>
+            <p>Strength: <span id="strengthStat">0</span></p>
+          </div>
+          <img id="popupWispieImage">
+          <div class="buttongroup">
+            <button id="feedBtn">FEED</button>
+            <button id="playBtn">PLAY</button>
+            <button id="trainBtn">TRAIN</button>
+            <button id="closePopupBtn">CLOSE</button>
+          </div>
+        </div>
+      </div>
+      
+     <div id="weatherReport">Weather: calm</div>
+
+
+     <div id="stormOverlay" class="hidden"></div>
+
+
+     <div id="stormMessagePopupRemoved" class="hidden">
+        <h2>OH NO!! A DISASTER! A sad wispie has perished in the storm</h2>
+        <p>Let this be a warning! your care means everything! take care of the others before its too late!</p>
+        <button id="stormMessageCloseBtnRemoved">Close</button>
+      </div>
+      
+      <!-- Nieuwe pop-up voor wanneer geen wispie is weggenomen -->
+      <div id="stormMessagePopupSafe" class="hidden">
+        <h2>The storm has passed!</h2>
+        <p>All your wispies are still safe! Good job!! Keep it up! </p>
+        <button id="stormMessageCloseBtnSafe">Close</button>
+      </div>
+
+      <audio id="bgMusic" src="sounds/bgmuziek.mp3" loop></audio>
+      <audio id="stormMusic" src="sounds/stormmuziek.mp3"></audio>
+      <audio id="wispieSound" src="sounds/wispiesound.mp3"></audio>
+      <audio id="grafsteenSound" src="sounds/grafsteen.mp3"></audio>
+
+  
+  </body>
+  </html>

@@ -1,0 +1,436 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: fantasy;
+    background-image: url("images/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* =overlays */
+#startScreen,
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(images/openingscherm.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 2000;
+}
+
+#overlay {
+    z-index: 999;
+}
+
+#startScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#startContent {
+    text-align: center;
+    padding: 40px;
+    border-radius: 20px;
+}
+
+#startScreen h1 {
+    font-size: 3em;
+    color: #ffda7b;
+    margin-bottom: 20px;
+}
+
+#startScreen h2 {
+    color: #e0be67;
+}
+
+#startButton {
+    font-size: 30px;
+    padding: 15px 30px;
+    background-color: #ffda7b;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Marker Felt', fantasy;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#startButton:hover {
+    background-color: #e2c35f;
+}
+
+#game {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: none;
+}
+
+#wispieContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Wispies */
+.wispie {
+    display: block;
+    position: absolute;
+    height: 200px;
+    width: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    transform-origin: bottom center;
+    z-index: 3000;
+    transform: translate(-50%, -100%);
+}
+
+.wispie:hover {
+    transform: translate(-50%, -100%) scale(1.1);
+}
+
+.wispie.gone {
+  filter: grayscale(100%) brightness(50%);
+  opacity: 0.4;
+  pointer-events: none;
+  animation: none;
+  transform: translate(-50%, -100%) scale(0.8);
+}
+
+
+/* Individuele posities */
+.wispie:nth-of-type(1) {
+    left: 17%;
+    top: 95%;
+}
+
+.wispie:nth-of-type(2) {
+    left: 30%;
+    top: 82%;
+}
+
+.wispie:nth-of-type(3) {
+    left: 50%;
+    top: 80%;
+}
+
+.wispie:nth-of-type(4) {
+    left: 65%;
+    top: 85%;
+}
+
+.wispie:nth-of-type(5) {
+    left: 80%;
+    top: 95%;
+}
+
+/* popups */
+#popup {
+    width: 500px;
+    max-width: 90%;
+    padding: 30px 20px;
+    background: url("images/popupscreen.png") no-repeat center center;
+    background-size: cover;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    font-family: 'Marker Felt', fantasy;
+    z-index: 4000;
+    transform: translate(-50%, -50%);
+}
+
+#popup h2 {
+    font-size: 2.2em;
+    color: #5a4500;
+    margin-bottom: 15px;
+}
+
+#popup img {
+    width: 150px;
+    margin: 10px auto 20px;
+    display: block;
+}
+
+/* Storm popup */
+#stormPopup {
+    width: 500px;
+    max-width: 90%;
+    padding: 30px 20px;
+    background: url("images/stormpopup.png") no-repeat center center;
+    background-size: cover;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    font-family: 'Marker Felt', fantasy;
+    z-index: 3100;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+#stormPopup:not(.hidden) {
+    display: block;
+}
+
+#stormPopup img {
+    width: 150px;
+    margin: 10px auto;
+    display: block;
+}
+
+/* Storm overlay */
+#stormOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("images/stormoverlay.png") center center no-repeat;
+    background-size: cover;
+    z-index: 2500;
+    display: none;
+    pointer-events: none;
+}
+
+#stormOverlay:not(.hidden) {
+    display: block;
+}
+
+/* weather report */
+#weatherReport {
+    position: fixed;
+    top: 60px;
+    left: 60px;
+    background-color: #e2c35f96;
+    padding: 45px;
+    border-radius: 8px;
+    border: #3a2800;
+    font-size: 16px;
+    font-family: fantasy;
+    font-weight: bold;
+    z-index: 3000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#weatherReport.warning {
+    background-color: #db7f16;
+}
+
+#weatherReport.storm {
+    background-color: #a50e0eb8;
+    font-weight: bold;
+}
+
+/* stats and buttons*/
+#stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#stats p {
+    font-size: 1.2em;
+    color: #3a2800;
+    margin: 6px 0;
+}
+
+.buttongroup {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.buttongroup button {
+    font-family: 'Marker Felt', fantasy;
+    font-size: 1.1em;
+    background: #543210;
+    color: #e0be67;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.buttongroup button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+/*utilities */
+.hidden {
+    display: none;
+  }
+  
+  
+
+#stormMessagePopupRemoved,
+#stormMessagePopupSafe {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffeb3b; /* felgeel */
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    text-align: center;
+    font-family: 'Marker Felt', fantasy;
+    color: #5a4500;
+    z-index: 5000;
+    max-width: 90%;
+    width: 400px;
+    display: none; /* standaard verborgen */
+}
+
+#stormMessagePopupRemoved h2,
+#stormMessagePopupSafe h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+#stormMessagePopupRemoved p,
+#stormMessagePopupSafe p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+#stormMessagePopupRemoved button,
+#stormMessagePopupSafe button {
+    background-color: #5a4500;
+    color: #ffeb3b;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: 'Marker Felt', fantasy;
+}
+
+#stormMessagePopupRemoved button:hover,
+#stormMessagePopupSafe button:hover {
+    background-color: #3a2800;
+}
+
+
+
+/* Utility class om te tonen */
+.visible {
+    display: block !important;
+}
+
+
+
+
+/* Animation classes */
+.floaty {
+    animation: floaty 3s ease-in-out infinite;
+}
+
+.wispie.floaty:nth-of-type(1) {
+    animation-delay: 0s;
+}
+
+.wispie.floaty:nth-of-type(2) {
+    animation-delay: 0.7s;
+}
+
+.wispie.floaty:nth-of-type(3) {
+    animation-delay: 1.4s;
+}
+
+.wispie.floaty:nth-of-type(4) {
+    animation-delay: 0.3s;
+}
+
+.wispie.floaty:nth-of-type(5) {
+    animation-delay: 1.1s;
+}
+
+.stormShake {
+    animation: stormShake 0.2s linear infinite;
+}
+
+.wispie.happy {
+    animation: floatHappy 3s ease-in-out infinite;
+}
+
+.wispie.sad {
+    animation: floatSad 6s ease-in-out infinite;
+}
+
+.wispie.verysad {
+    animation: floatVerySad 0.05s linear infinite;
+}
+
+.wispie.storm {
+    animation: stormShake 0.05s linear infinite;
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes floaty {
+    0%, 100% {
+        transform: translate(-50%, -100%) translateY(0);
+    }
+    50% {
+        transform: translate(-50%, -100%) translateY(-10px);
+    }
+}
+
+@keyframes stormShake {
+    0%, 100% {
+        transform: translate(-50%, -100%) translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(calc(-50% + 3px), calc(-100% + 3px)) rotate(5deg);
+    }
+    50% {
+        transform: translate(calc(-50% - 3px), calc(-100% - 3px)) rotate(-5deg);
+    }
+    75% {
+        transform: translate(calc(-50% + 3px), calc(-100% + 3px)) rotate(5deg);
+    }
+}
+
+@keyframes floatHappy {
+    0%, 100% {
+        transform: translate(-50%, -100%) translate(0, 0);
+    }
+    50% {
+        transform: translate(calc(-50% + 8px), calc(-100% + 5px));
+    }
+}
+
+@keyframes floatSad {
+    0%, 100% {
+        transform: translate(-50%, -100%) translate(0, 0);
+    }
+    50% {
+        transform: translate(calc(-50% + 3px), calc(-100% + 2px));
+    }
+}
+
+@keyframes floatVerySad {
+    0%, 100% {
+        transform: translate(-50%, -100%) translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(calc(-50% + 2px), calc(-100% + 2px)) rotate(2deg);
+    }
+}
+
